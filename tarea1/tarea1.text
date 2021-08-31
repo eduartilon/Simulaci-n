@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[sort&compress,numbers]{natbib} 
+\usepackage{url}
+\usepackage{hyperref} 
+\usepackage[spanish]{babel} 
+
+\title{Tarea 1}
+\author{Eduardo Navarro}
+\date{August 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+En base a los conceptos aprendidos, se hara una simulacion sobre el movimiento de una particula y el efecto que tienen las dimensiones y los pasos sobre la distancia maxima de esta. 
+
+\section{Desarrollo}
+Se utilizo el lenguaje de programacion en R para el corrimiento de los experimentos en base a lo visto en clase sobre el movimiento browniano\cite{browniano} y se trabajo con el codigo variando el largo (dur) y las dimensiones (dim).Se siguio la recomendacion de usar data frames en base a unos ejemplos \cite{tutorialr}. El numero de experimentos a realizar y los resultados para su posterior recoleccion en una grafica se harian en base a otro codigo \cite{DraElisa} para poder asi lograr la recoleccion de datos en diversos experimentos simultaneos, en multiplos de pasos y a diversas dimensiones. capturando asi la distancia maxima para cada una de ellas. Pese a todo solo se logro trabajar con el codigo inicial variando solo el largo y las dimensions, para la posterior realizacion de este primer reporte aplicando pequeñas instrucciones\cite{manualL}. 
+
+\section{Conclusión}
+En las varias pruebas individuales que se realizaron se observo una tendencia en el aumendo de la distancia proporcional al aumento de las dimensiones y al largo de la caminata en base a la distancia mayor obtenida. No se lograron los objetivos principales que eran hacer multiples experimentos al mismo tiempo para despues graficar las distancias obtenidas y obtener una grafica de tendencias. Se intento llegar a los objetivos propuestos por la tarea pero no obtuve resultados satisfactorios. Aun queda bastante por recorrer ya que presente muy grandes dificultades para tratar de entender lo que estaba tratando de hacer. ya que di el mejor esfuerzo que pude hacer es un poco amargo el no haberlo podido lograr.
+
+\bibliography{referencias}
+\bibliographystyle{plainnat}
+
+\end{document}
