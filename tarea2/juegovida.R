@@ -1,11 +1,11 @@
 library(parallel)
 dim <- 10
 num <-  dim^2
-p <- c(0.4, 0.7, 0.9)
+p <- c(0.2, 0.25, 0.5,0.6,0.7)
 datos = data.frame()
 
 for (inicio in p) {
-  for (rep in 1:3) {
+  for (rep in 1:2) {
 actual <- matrix(round(runif(num) <= p), nrow=dim, ncol=dim, byrow=TRUE)
 paso <- function(pos) {
     fila <- floor((pos - 1) / dim) + 1
@@ -31,13 +31,13 @@ for (iteracion in 1:30) {
      print("Ya no queda nadie vivo.")
      
      }else { vivos = 1
-     print("hay vida")     
+     print("hay vida")
  }
  stopCluster(cluster)
 }
 nvivos = c(vivos)
 print(nvivos)
-prob= (sum(nvivos))/3
+prob= (sum(nvivos))/2
 respuesta = c(inicio, prob)
 datos = rbind(datos, respuesta)
 }
