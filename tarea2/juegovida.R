@@ -7,7 +7,7 @@ datos = data.frame()
 datos1 = data.frame()
 for (inicio in p) {
   for (rep in 1:30) {
-actual <- matrix(round(runif(num) <= p), nrow=dim, ncol=dim, byrow=TRUE)
+actual <- matrix(round(runif(num) < p), nrow=dim, ncol=dim, byrow=TRUE)
 paso <- function(pos) {
     fila <- floor((pos - 1) / dim) + 1
     columna <- ((pos - 1) %% dim) + 1
