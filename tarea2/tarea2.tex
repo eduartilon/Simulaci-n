@@ -5,6 +5,7 @@
 \usepackage{hyperref} 
 \usepackage{graphicx} % poner figuras
 \usepackage[spanish,es-tabla]{babel} % nombre tablas
+\usepackage{listings}
 
 \title{Tarea 2:
 Juego de la vida}
@@ -20,7 +21,7 @@ Juego de la vida}
 En base a lo visto en la practica 2 y con ayuda de una simulación se procederá a calcular la probabilidad del éxito de vida a partir de la probabilidad inicial dada para poder observar la influencia de los estados iniciales.
 
 \section{Desarrollo}
-Se utilizó el lenguaje de programación en R y se trabajó en gran medida en base al código de la Dra. Elisa\cite{DraElisa}. Al código se le hicieron modificaciones correspondientes para remover el código no útil para los propósitos de esta practica. Se siguieron las recomendaciones vistas en clase y en el canal de discord de agregar “for” adicionales contenidos uno dentro de otro para poder realizar replicas a diferentes valores de probabilidad. En base a los objetivos propuestos por la tarea se manipularon variables como las repeticiones, la iteración, la probabilidad y el número de dimensiones de la matriz \cite{automata}. Se crearon los data.frame correspondientes para la manipulación de los datos obtenidos de los experimentos con ayuda del comando aggregate\cite{youtubeaggregate} y la posterior creación de las graficas con ayuda de ggplot2\cite{hadley}. Se modificaron los nombres y se editaron las dimensiones de los ejes con guia de un video\cite{youtubePlot}.
+Se utilizó el lenguaje de programación en R y se trabajó en gran medida en base al código de la Dra. Elisa \cite{DraElisa}. Al código se le hicieron modificaciones correspondientes para remover el código no útil para los propósitos de esta practica. Se siguieron las recomendaciones vistas en clase y en el canal de discord de agregar “for” adicionales contenidos uno dentro de otro para poder realizar replicas a diferentes valores de probabilidad. En base a los objetivos propuestos por la tarea se manipularon variables como las repeticiones, la iteración, la probabilidad y el número de dimensiones de la matriz \cite {automata}. Se crearon los data.frame correspondientes para la manipulación de los datos obtenidos de los experimentos con ayuda del comando aggregate \cite{youtubeaggregate} y la posterior creación de las graficas con ayuda de ggplot2 \cite{hadley}. Se modificaron los nombres y se editaron las dimensiones de los ejes con guia de un video \cite{youtubePlot}.
 
 
 \begin{table}[h!]
@@ -42,7 +43,7 @@ Probabilidad inicial & Vida \\ \hline
 En la tabla \ref{Tab:Tabla1} se observa un ejemplo de los valores obtenidos por el primer data frame. Los resultados de los experimentos de organizan en 5 valores diferentes de probabilidad a 30 repeticiones cada uno, esto nos da un total de 150 valores para esta información en total. El 1 en vida indica que se formo un patron repetible y por lo tanto no desaparece.
 
 \vspace{5mm}
-Con ayuda de mis compañeros se sugirio el metodo de utilizar un 2do data frame. Natalia Perez sugirió utilizar la función "aggregate" \cite{youtubeaggregate} la cual nos ayudo a procesar los datos dentro del segundo data frame obteniendo de esa forma los promedios de cada probabilidad inicial en relación a la vida que se creaba ya que como tenian valor de 1 nos permitieron realizar este procedimiento de esta forma.
+Con ayuda de mis compañeros se sugirio el metodo de utilizar un 2do data frame. Natalia Perez sugirió utilizar la función \texttt{aggregate} \cite{youtubeaggregate} la cual nos ayudo a procesar los datos dentro del segundo data frame obteniendo de esa forma los promedios de cada probabilidad inicial en relación a la vida que se creaba ya que como tenian valor de 1 nos permitieron realizar este procedimiento de esta forma.
 
 \begin{table}[h!]
 \begin{center}
@@ -60,7 +61,7 @@ Probabilidad inicial & Vida   \\ \hline
 \end{center}
 \end{table}
 
-En la tabla anterior (\ref{Tab:Tabla2}) se ven los datos obtenidos los cuales se procedieron a graficar con la librería ggplot2 de R \cite{hadley}\cite{youtubePlot} obteniendo la siguiente grafica
+En la tabla anterior (\ref{Tab:Tabla2}) se ven los datos obtenidos los cuales se procedieron a graficar con la librería ggplot2 de R \cite{hadley,youtubePlot} obteniendo la siguiente grafica
 
 \begin{figure} [h!]% figura
     \centering
@@ -78,7 +79,62 @@ Los valores de la tabla \ref{Tab:Tabla2} se ven reflejados en la figura \ref{Fig
     \label{Figura2}
 \end{figure}
 
-La figura \ref{Figura2} nos muestra un ejemplo de los resultados obtenidos para dimensiones grandes, en él se puede observar que la probabilidad de vida se obtiene de casi un 100 \% en todas las probabilidades iniciales debido a que hay más espacio para que esta se genere.
+La figura \ref{Figura2} nos muestra un ejemplo de los resultados obtenidos para dimensiones grandes, en él se puede observar que la probabilidad de vida se obtiene de casi un 100 \% en todas las probabilidades iniciales debido a que hay más espacio para que esta se genere. A continuación, mi codigo.
+
+\begin{lstlisting}[language=R]
+library(parallel)
+library(ggplot2)
+dim <- 10
+num <-  dim^2
+p <- c(0.1, 0.3, 0.5,0.7,0.9)
+datos = data.frame()
+datos1 = data.frame()
+for (inicio in p) {
+  for (rep in 1:30) {
+actual <- matrix(round(runif(num) < p), nrow=dim, ncol=dim, byrow=TRUE)
+paso <- function(pos) {
+    fila <- floor((pos - 1) / dim) + 1
+    columna <- ((pos - 1) %% dim) + 1
+    vecindad <-  actual[max(fila - 1, 1) : min(fila + 1, dim),
+                        max(columna - 1, 1): min(columna + 1, dim)]
+    return(1 * ((sum(vecindad) - actual[fila, columna]) == 3))
+}
+  
+cluster <- makeCluster(detectCores() - 2)
+clusterExport(cluster, "dim")
+clusterExport(cluster, "paso")
+
+for (iteracion in 1:50) {
+     clusterExport(cluster, "actual")
+     siguiente <- parSapply(cluster, 1:num, paso)
+     vivos = sum(siguiente)
+     cat(inicio, rep, iteracion, vivos, '\n')
+     actual <- matrix(siguiente, nrow=dim, ncol=dim, byrow=TRUE)
+     }
+     if (vivos == 0) { 
+     vivos = 0 # todos murieron
+     print("Ya no queda nadie vivo.")
+     
+     }else { vivos = 1
+     print("hay vida")
+ }
+
+respuesta = c(inicio, vivos)
+datos = rbind(datos, respuesta) 
+stopCluster(cluster)
+}
+
+}
+names(datos)<-c("probabilidad", "vida")
+datos1 = aggregate(vida~probabilidad, datos, mean)
+ggplot(datos1, aes(x = probabilidad, y = (vida*100) )) +
+geom_line()+geom_point()+
+  labs(x="Probabilidad al inicio", 
+       y="% de probabilidad de vida", 
+       title = "Probabilidad de vida a dimension 10")+
+  scale_x_continuous(limits = c(0,1))+
+  coord_cartesian(ylim = c(0,10))
+\end{lstlisting}
 
 \section{Conclusiones}
 En esta práctica aprendimos a agregar en cuenta la importancia de estados pasados para la generación de nuevos estados a partir de ciertas probabilidades dadas. A la vez que las interacciones entre vecinos tienen un efecto sobre los resultados obtenidos. La dimensión es un factor grande que determina la probabilidad de vida final independientemente de la inicial ya que a mayor dimensión mayor probabilidad de vida hay. La razón de que se obtuvieran graficas relativamente diferentes para cada experimento dentro del mismo rango de dimensión se puede deber a que son probabilidades iniciales y aunque con menor frecuencia, pueden llegar a los mismos valores de poder generar vida dentro del experimento. En lo personal me siento muy contento con el resultado ya que se trabajó exhaustivamente para la realización del presente trabajo.
@@ -87,3 +143,4 @@ En esta práctica aprendimos a agregar en cuenta la importancia de estados pasad
 \bibliographystyle{plainnat}
 
 \end{document}
+
