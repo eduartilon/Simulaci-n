@@ -1,8 +1,8 @@
 library(parallel)
 library(ggplot2)
-dim <- 15
+dim <- 10
 num <-  dim^2
-p <- c(0.2, 0.25, 0.5,0.6,0.7)
+p <- c(0.1, 0.3, 0.5,0.7,0.9)
 datos = data.frame()
 datos1 = data.frame()
 for (inicio in p) {
@@ -49,4 +49,4 @@ geom_line()+geom_point()+
        y="% de probabilidad de vida", 
        title = "Probabilidad de vida a partir de un estado inicial dado")+
   scale_x_continuous(limits = c(0,1))+
-  coord_cartesian(ylim = c(0,100))
+  coord_cartesian(ylim = c(0,10))
