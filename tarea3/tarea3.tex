@@ -117,7 +117,7 @@ Ya en R se utilizaron las gráficas de caja bigote \ref{grafica1} para una mejor
     \includegraphics[width=120mm]{grafica1.png} % archivo
 \end{figure}
 
-Se procedio realizar las pruebas estadisticas utilizando la prueba de normalidad de shapiro-Wilk \cite{shapiro} con \texttt{shapiro.test} que está recomendado para muestras pequeñas, obteniendose valores en la tabla \ref{tablaSha} de p < al 0.05 lo que indica que nuestra muestra no cuenta con valores mayores al 5\% y por lo tanto no sigue una distribución normal y se rechaza la hipótesis nula, por lo que se opto por una prueba no paramétrica como la de Kruskall-Wallis\cite{Kruskall} para varias variables donde también se obtuvieron valores menores al 5\% en algunos casos.
+Se procedio realizar las pruebas estadisticas utilizando la prueba de normalidad de shapiro-Wilk \cite{shapiro} con \texttt{shapiro.test} que está recomendado para muestras pequeñas, obteniendose valores en la tabla \ref{tablaSha} de p menores al 0.05 lo que indica que nuestra muestra no cuenta con valores mayores al 5\% y por lo tanto no sigue una distribución normal y se rechaza la hipótesis nula, por lo que se opto por una prueba no paramétrica como la de Kruskall-Wallis\cite{Kruskall} para varias variables donde también se obtuvieron valores menores al 5\% en algunos casos.
 
 \begin{table}[h!]
 \centering
@@ -141,7 +141,7 @@ Prueba dp todos los núcleos & 0.90071 & 0.01388 \\ \hline
 Prueba oa todos los núcleos & 0.91195 & 0.02537 \\ \hline
 \end{tabular}
 \end{table}
-En la tabla \ref{tablakrus} se pueden apreciar los diversos valores obtenidos de la prueba Kruskall-Wallis de la cual podemos inferir que tanto los valores de todos los núcleos contenidos en todas las pruebas como los de las pruebas dp y oa presentan una p < 0.05 lo que nos quiere decir que no todas las medianas de los grupos son iguales lo cual concuerda con nuestro grafico ya que los grupos de dp y oa fueron los que presentaron mayor cambio en tiempos en cuanto al número de núcleos utilizados dentro de este grupo de datos. en cuanto al grupo fp se considera que no hubo mucho cambio a la hora de medir entre núcleos en comparación con los otros dos grupos de pruebas.
+En la tabla \ref{tablakrus} se pueden apreciar los diversos valores obtenidos de la prueba Kruskall-Wallis de la cual podemos inferir que tanto los valores de todos los núcleos contenidos en todas las pruebas como los de las pruebas dp y oa presentan una p menor a 0.05 lo que nos quiere decir que no todas las medianas de los grupos son iguales lo cual concuerda con nuestro grafico ya que los grupos de dp y oa fueron los que presentaron mayor cambio en tiempos en cuanto al número de núcleos utilizados dentro de este grupo de datos. en cuanto al grupo fp se considera que no hubo mucho cambio a la hora de medir entre núcleos en comparación con los otros dos grupos de pruebas.
 
 \begin{table}[h!]
 \centering
@@ -202,19 +202,19 @@ datos = data.frame(
                2.99310684204101,	3.98993492126464,	1.99413299560546)
 )
 
-datos\$nucleos = as.factor(datos\$nucleos)
-datos\$pruebas = as.factor(datos\$pruebas)
+datos$nucleos = as.factor(datos$nucleos)
+datos$pruebas = as.factor(datos$pruebas)
 
 ggplot(datos, aes(x= nucleos, y= tiempo, fill= pruebas)) + # fill=name allow to automatically dedicate a color for each group
   geom_boxplot()+ labs(x="Núcleos", y= "Tiempo")
 
-shapiro.test(datos\$tiempo)
+shapiro.test(datos$tiempo)
 
 kruskal.test(tiempo~nucleos, data=datos)
 kruskal.test(tiempo~pruebas, data=datos)
 
 
-datos1a = data.frame( \#Todas las pruebas 1 núcleo)
+datos1a = data.frame( #Todas las pruebas 1 núcleo)
   "nucleos" = rep(c(1), times=c(27)),
   "pruebas" = rep(c("fp","dp","oa"), times=c(9,9,9)),
   "tiempo" = c(4.35805320739746,	4.72307205200195,	5.02586364746093,
@@ -227,11 +227,11 @@ datos1a = data.frame( \#Todas las pruebas 1 núcleo)
                4.96768951416015,	4.0135383605957,	4.01735305786132,	
                4.98390197753906,	4.02259826660156,	4.02450561523437
   ))
-shapiro.test(datos1a\$tiempo)
+shapiro.test(datos1a$tiempo)
 
 kruskal.test(tiempo~pruebas, data=datos1a)
 
-datosfpa = data.frame( \# prueba fp todos los núcleos
+datosfpa = data.frame( # prueba fp todos los núcleos
   "nucleos" = rep(c(1,2,3), times=c(9,9,9)),
   "pruebas" = rep(c("fp"), times=c(27)),
   "tiempo" = c(4.35805320739746,	4.72307205200195,	5.02586364746093,
@@ -246,7 +246,7 @@ datosfpa = data.frame( \# prueba fp todos los núcleos
 
  ))
 
-shapiro.test(datosfpa\$tiempo)
+shapiro.test(datosfpa$tiempo)
 
 kruskal.test(tiempo~nucleos, data=datosfpa)
 
@@ -258,7 +258,7 @@ datos1fp = data.frame(
                4.09960746765136,	4.01854515075683,	4.1365623474121
 
   ))
-shapiro.test(datos1fp\$tiempo)
+shapiro.test(datos1fp$tiempo)
 
 
 datos1dp = data.frame(
@@ -269,9 +269,9 @@ datos1dp = data.frame(
                 5.0663948059082,	3.98850440979003,	4.02402877807617
                
   ))
-shapiro.test(datos1dp\$tiempo)
+shapiro.test(datos1dp$tiempo)
 
-datos2a = data.frame( \# Todas las pruebas 2 núcleos
+datos2a = data.frame( # Todas las pruebas 2 núcleos
   "nucleos" = rep(c(2), times=c(27)),
   "pruebas" = rep(c("fp","dp","oa"), times=c(9,9,9)),
   "tiempo" = c( 2.95448303222656,	9.22441482543945,	6.18577003479003,
@@ -285,10 +285,10 @@ datos2a = data.frame( \# Todas las pruebas 2 núcleos
                 3.07750701904296,	3.00145149230957,	2.9921531677246
 
   ))
-shapiro.test(datos2a\$tiempo)
+shapiro.test(datos2a$tiempo)
 kruskal.test(tiempo~pruebas, data=datos2a)
 
-datosdpa = data.frame( \# Prueba dp todos los núcleos
+datosdpa = data.frame( # Prueba dp todos los núcleos
   "nucleos" = rep(c(1,2,3), times=c(9,9,9)),
   "pruebas" = rep(c("dp"), times=c(27)),
   "tiempo" = c(4.11248207092285,	4.12225723266601,	4.47821617126464,	
@@ -303,7 +303,7 @@ datosdpa = data.frame( \# Prueba dp todos los núcleos
                
   ))
 
-shapiro.test(datosdpa\$tiempo)
+shapiro.test(datosdpa$tiempo)
 kruskal.test(tiempo~nucleos, data=datosdpa)
 
 datos2fp = data.frame(
@@ -313,7 +313,7 @@ datos2fp = data.frame(
                 5.18536567687988,	4.23479080200195,	3.31377983093261,
                 2.94828414916992,	2.9611587524414,	2.95948982238769
   ))
-shapiro.test(datos2fp\$tiempo)
+shapiro.test(datos2fp$tiempo)
 
 datos2dp = data.frame(
   "nucleos" = rep(c(2), times=c(9)),
@@ -322,9 +322,9 @@ datos2dp = data.frame(
                 3.0219554901123,	2.96616554260253,	3.96370887756347,	
                 2.99429893493652,	2.99501419067382,	3.96418571472167
   ))
-shapiro.test(datos2dp\$tiempo)
+shapiro.test(datos2dp$tiempo)
 
-datos3a = data.frame( \# Todas las pruebas 3 núcleos
+datos3a = data.frame( # Todas las pruebas 3 núcleos
   "nucleos" = rep(c(3), times=c(27)),
   "pruebas" = rep(c("fp","dp","oa"), times=c(9,9,9)),
   "tiempo" = c(2.9919147491455,	8.01825523376464,	8.96430015563964,	
@@ -337,10 +337,10 @@ datos3a = data.frame( \# Todas las pruebas 3 núcleos
                1.99389457702636,	2.9916763305664,	1.99437141418457,	
                2.99310684204101,	3.98993492126464,	1.99413299560546
   ))
-shapiro.test(datos3a\$tiempo)
+shapiro.test(datos3a$tiempo)
 kruskal.test(tiempo~pruebas, data=datos3a)
 
-datosoaa = data.frame( \# Prueba oa todos los núcleos
+datosoaa = data.frame( # Prueba oa todos los núcleos
   "nucleos" = rep(c(1,2,3), times=c(9,9,9)),
   "pruebas" = rep(c("oa"), times=c(27)),
   "tiempo" = c(5.29384613037109,	4.96077537536621,	4.03094291687011,	
@@ -353,7 +353,7 @@ datosoaa = data.frame( \# Prueba oa todos los núcleos
                1.99389457702636,	2.9916763305664,	1.99437141418457,	
                2.99310684204101,	3.98993492126464,	1.99413299560546
   ))
-shapiro.test(datosoaa\$tiempo)
+shapiro.test(datosoaa$tiempo)
 kruskal.test(tiempo~nucleos, data=datosoaa)
 
 datos3fp = data.frame(
@@ -363,7 +363,7 @@ datos3fp = data.frame(
                 5.00655174255371,	3.05914878845214,	2.99239158630371,	
                 1.96743011474609,	1.99532508850097,	2.00200080871582
   ))
-shapiro.test(datos3fp\$tiempo)
+shapiro.test(datos3fp$tiempo)
 
 datos3dp = data.frame(
   "nucleos" = rep(c(3), times=c(9)),
@@ -372,7 +372,7 @@ datos3dp = data.frame(
                 3.00574302673339,	2.99263000488281,	1.99532508850097,	
                 1.97935104370117,	1.99556350708007,	3.00526618957519
   ))
-shapiro.test(datos3fp\$tiempo)
+shapiro.test(datos3fp$tiempo)
 
 \end{lstlisting}
 
