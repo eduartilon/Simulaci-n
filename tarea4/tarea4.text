@@ -10,7 +10,7 @@
 \usepackage[top=15mm,left=20mm,right=20mm,bottom=25mm]{geometry} % margenes
 \usepackage{hyperref} % ligas de URLs
 \usepackage{graphicx} % poner figuras
-\usepackage[spanish]{babel} % otros idiomas
+\usepackage[spanish,es-tabla]{babel} % nombre tablas
 
 
 \definecolor{mypink}{rgb}{0.976, 0.462, 0.847}
