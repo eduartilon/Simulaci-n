@@ -3,7 +3,6 @@ desde <- 3
 hasta <- 7
 cuan <- c(100, 1000, 10000, 100000, 1000000, 10000000)
 entero<- c(0.0488341111)
-datas=data.frame()
 compar <- data.frame()
 n = seq( 1, 10, 1)
 j = c(1:50)
