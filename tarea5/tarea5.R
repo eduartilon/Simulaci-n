@@ -1,7 +1,7 @@
 library(ggplot2)
 desde <- 3
 hasta <- 7
-cuan <- c(100, 1000, 10000)
+cuan <- c(100, 1000, 10000, 100000, 1000000, 10000000)
 entero<- c(0.0488341111)
 datas=data.frame()
 compar <- data.frame()
@@ -36,5 +36,11 @@ compar=rbind(compar, values)
 }
 }
 names(compar) <- c("puntos", "decimales")
+compar$puntos = as.factor(compar$puntos)
+
 ggplot(compar, aes(x=puntos , y= decimales , fill= rep)) + # fill=name allow to automatically dedicate a color for each group
-  geom_boxplot()+ labs(x="Puntos", y= "Decimales")
+  geom_boxplot(fill = "#F8766D", colour = "#1F3552")+
+  stat_boxplot(geom = "errorbar", width = 0.9)+
+  theme(axis.line = element_line(colour = "black", size = 0.25))+
+  coord_cartesian(ylim = c(0,8))+
+  labs(x="Puntos", y= "Decimales")
