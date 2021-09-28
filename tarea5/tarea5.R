@@ -1,11 +1,13 @@
+library(ggplot2)
 desde <- 3
 hasta <- 7
-cuan <- c(10, 100, 1000)
-entero<- c(0.04883411)
+cuan <- c(100, 1000, 10000)
+entero<- c(0.0488341111)
 datas=data.frame()
 compar <- data.frame()
 n = seq( 1, 10, 1)
 j = c(1:50)
+
 for (cuantos in cuan) {
 for (rep in j) {
   f <- function(x) { return(1 / (exp(x) + exp(-x))) } # funcion que piden
@@ -18,10 +20,6 @@ for (rep in j) {
 decimales =((pi / 2) * integral)
 print(decimales)
 
-valores <- c(cuantos, decimales)
-
-datas = rbind(datas, valores)
-
 
 compa<- c(decimales)
 
@@ -32,7 +30,11 @@ for (i in n) {
   } else {break;}
 }
 
-compar=rbind(compar, num)
-}
-}
+values<-c(cuantos, num)
 
+compar=rbind(compar, values)
+}
+}
+names(compar) <- c("puntos", "decimales")
+ggplot(compar, aes(x=puntos , y= decimales , fill= rep)) + # fill=name allow to automatically dedicate a color for each group
+  geom_boxplot()+ labs(x="Puntos", y= "Decimales")
