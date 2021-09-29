@@ -39,7 +39,7 @@
 Siguiendo las indicaciones de la clase, se realizó una comparación entre un aproximado del valor del área de un integral, al cual le aplicamos pruebas estadísticas para ver el que tan mejor se aproxima nuestro resultado.
 
 \section{Desarrollo}
-Con las instrucciones de la tarea \cite{twitchsimu} se prosiguió a crear una instrucción para ver la similitud entre 2 cifras y que tan cercanas se encontraban a partir de sus decimales, agregándola al código que se nos proporcionó en \cite{montec} para ver la similitud entre la cifra generada y la calculada mostrada en \cite{montec}. Al programa se le añadieron \texttt{for} para los puntos y otro para las repeticiones dentro de éste. Se añadió un \texttt{for} adicional para la revisión de los decimales.
+Con las instrucciones de la tarea \cite{twitchsimu} se prosiguió a crear una instrucción para ver la similitud entre 2 cifras y que tan cercanas se encontraban a partir de sus decimales \cite{p}, agregándola al código que se nos proporcionó en \cite{montec} para ver la similitud entre la cifra generada y la calculada mostrada en \cite{montec}. Al programa se le añadieron \texttt{for} para los puntos y otro para las repeticiones dentro de éste. Se añadió un \texttt{for} adicional para la revisión de los decimales.
 
 
 \begin{lstlisting} [language=R, caption= Código para la obtención de la relación entre los puntos y los decimales que coinciden.]
@@ -108,7 +108,7 @@ ggplot(compar, aes(x=puntos , y= decimales , fill= rep)) + # fill=name allow to 
 \end{lstlisting}
 
 
-A los datos de la tabla \ref{tabla1} se les hicieron las pruebas estadísticas de Shapiro–Wilk \cite{shapiro} y en base a los resultados obtenidos se realizó la prueba de Kruskal-Wallis \cite{Kruskall}
+A los datos de la tabla \ref{tabla1} se les hicieron las pruebas estadísticas de Shapiro–Wilk \cite{shapiro} y en base a los resultados obtenidos se realizó la prueba de Kruskal-Wallis \cite{Kruskall}.
 
 \newpage
 
@@ -145,13 +145,91 @@ H(5) & p-value \\ \hline
 \label{tabla}
 \begin{tabular}{|l|l|}
 \hline
-H(3) & p-value = \\ \hline
+H(3) & p-value \\ \hline
 3.9089 & 0.2715 \\ \hline
 \end{tabular}
 \end{table}
 
+Se intentó el primer reto donde se tenía que verificar el valor de pi \cite{pi} obteniéndose la tabla \ref{tabla5} a la cual se le realizarón las pruebas estadísticas y finalmente se obtuvo la gráfica \ref{grafica2}. 
+
+\begin{table}[h!]
+\centering
+\caption{Ejemplos de valores de pi obtenidos.}
+\label{tabla5}
+\begin{tabular}{|r|r|r|}
+\hline
+\multicolumn{1}{|l|}{valor pi} & \multicolumn{1}{l|}{puntos} & \multicolumn{1}{l|}{decimales} \\ \hline
+3.124 & 10000 & 1 \\ \hline
+3.154 & 10000 & 1 \\ \hline
+3.1212 & 10000 & 1 \\ \hline
+3.1556 & 10000 & 1 \\ \hline
+3.1532 & 10000 & 1 \\ \hline
+3.1188 & 10000 & 1 \\ \hline
+3.146 & 10000 & 2 \\ \hline
+3.1388 & 10000 & 1 \\ \hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+\begin{figure} [h!]% figura
+\renewcommand{\figurename}{Gráfica}
+    \centering
+    \caption{Decimales que coinciden en pi.}
+    \label{grafica2}
+    \includegraphics[width=120mm]{grafica2.png} % archivo
+\end{figure}
+
+\begin{table}[h!]
+\centering
+\caption{Resultados de la prueba Shapiro–Wilk para pi}
+\label{tabla6}
+\begin{tabular}{|c|c|}
+\hline
+w & p \\ \hline
+\multicolumn{1}{|r|}{0.60337} & \multicolumn{1}{r|}{8.386*10\textasciicircum{}-10} \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{Resultados de la prueba Kruskal-Wallis para pi.}
+\label{tabla7}
+\begin{tabular}{|c|c|}
+\hline
+H(2) & p-value \\ \hline
+\multicolumn{1}{|r|}{21.239} & \multicolumn{1}{r|}{2.44E-05} \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{lstlisting} [language=R, caption= Código para la obtención de pi.]
+
+entero = 3.141592 
+n = seq(1, 6, 1)
+cuan = c(1000, 10000, 1000000)
+compar = data.frame()
+j = c(1:50)
+
+for (cuantos in cuan) {
+  for (rep in j){
+    interior = 0
+    for (r in 1:cuantos) {
+      x = runif(1, -1, 1)
+      y = runif(1, -1, 1)
+      d = sqrt(x*x + y*y)
+      if (d < 1) {
+        interior = interior + 1
+      }
+    }
+    
+    tasa = interior / cuantos
+    pi = 4 * tasa
+    
+    print(pi)
+\end{lstlisting}
+
 \section{Conclusiones}
-Al obtenerse una p menor a 0.05 en la prueba de Shapiro-Wilk se tiene que los datos no vienen de una distribución normal. esto se pudo observar en la grafica donde se varia la media que se iba incrementando de una forma no lineal. con los resultados de la prueba de Kruskal Wallis se obtuvo una p pequeña para la prueba con todos los puntos  y se rechaza la hipótesis nula donde se concluye que no todas las medianas de población son iguales. para los últimos 2 valores se aprecia que pueden ser similares lo que indica una tendencia a la estabilización en este punto.
+Al obtenerse una p menor a 0.05 en la prueba de Shapiro-Wilk se tiene que los datos no vienen de una distribución normal. esto se pudo observar en la grafica donde se varia la media que se iba incrementando de una forma no lineal. con los resultados de la prueba de Kruskal Wallis se obtuvo una p pequeña para la prueba con todos los puntos  y se rechaza la hipótesis nula donde se concluye que no todas las medianas de población son iguales. para los últimos 2 valores se aprecia que pueden ser similares lo que indica una tendencia a la estabilización en este punto. Para el reto pi se obtuvieron resultados similares.
 
 \bibliography{referencias}
 \bibliographystyle{plainnat}
