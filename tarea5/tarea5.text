@@ -135,7 +135,7 @@ A los datos de la tabla \ref{tabla1} se les hicieron las pruebas estadísticas d
 \begin{tabular}{|c|c|}
 \hline
 H(5) & p-value \\ \hline
-180.72 & \multicolumn{1}{r|}{2.2*\textasciicircum{}-16} \\ \hline
+180.72 & \multicolumn{1}{r|}{2.2*10\textasciicircum{}-16} \\ \hline
 \end{tabular}
 \end{table}
 
