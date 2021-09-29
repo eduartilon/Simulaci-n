@@ -182,7 +182,7 @@ Se intentó el primer reto donde se tenía que verificar el valor de pi \cite{pi
 
 \begin{table}[h!]
 \centering
-\caption{Resultados de la prueba Shapiro–Wilk para pi}
+\caption{Resultados de la prueba Shapiro–Wilk para pi.}
 \label{tabla6}
 \begin{tabular}{|c|c|}
 \hline
