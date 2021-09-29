@@ -44,6 +44,10 @@ ggplot(compar, aes(x=puntos , y= decimales , fill= rep)) + # fill=name allow to 
   coord_cartesian(ylim = c(0,8))+
   labs(x="Puntos", y= "Decimales")
 
+shapiro.test(compar$decimales)
+
+kruskal.test(decimales~puntos, data=compar)
+
 datos = data.frame(
   "100" = c(1,2,1,1,1,1,1,2,2,1,2,2,1,
             2,2,2,2,1,1,1,1,1,1,1,1,
