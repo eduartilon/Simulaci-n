@@ -198,7 +198,7 @@ w & p \\ \hline
 \begin{tabular}{|c|c|}
 \hline
 H(2) & p-value \\ \hline
-\multicolumn{1}{|r|}{21.239} & \multicolumn{1}{r|}{2.44E-05} \\ \hline
+\multicolumn{1}{|r|}{21.239} & \multicolumn{1}{r|}{2.44*10\textasciicircum{}-5} \\ \hline
 \end{tabular}
 \end{table}
 
@@ -234,3 +234,4 @@ Al obtenerse una p menor a 0.05 en la prueba de Shapiro-Wilk se tiene que los da
 \bibliography{referencias}
 \bibliographystyle{plainnat}
 \end{document}
+
