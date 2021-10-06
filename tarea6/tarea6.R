@@ -1,4 +1,5 @@
 library(ggplot2)
+library(tidyverse)
 
 l <- 1.5
 n <- 50
@@ -6,7 +7,7 @@ pi <- 0.05
 pr <- 0.02
 v <- l / 30
 vac<- seq(0.1,0.9,0.1)
-g<-(1:10)
+g<-(1:30)
 
 datos<-data.frame()
 
@@ -114,7 +115,53 @@ for (pvac in vac) {
 
 names(datos)<-c("probabilidad", "maximo", "porcentaje","tiempo")
 print(datos)
-write.table(datos,"datosp6.txt")
+
+datos$probabilidad = as.factor(datos$probabilidad)
+
+ggplot(datos, aes(x=probabilidad , y= porcentaje , fill= rep)) + # fill=name allow to automatically dedicate a color for each group
+  geom_boxplot(fill = "#F8766D", colour = "#1F3552")+
+  stat_boxplot(geom = "errorbar", width = 0.9)+
+  theme(axis.line = element_line(colour = "black", size = 0.25))+
+  coord_cartesian(ylim = c(0,70))+
+  labs(x="Probabilidad de vacunación al inicio", y= "Porcentaje de infectados")
+
+ggplot(datos, aes(x=probabilidad , y= tiempo , fill= rep)) + # fill=name allow to automatically dedicate a color for each group
+  geom_boxplot(fill = "#F8766D", colour = "#1F3552")+
+  stat_boxplot(geom = "errorbar", width = 0.9)+
+  theme(axis.line = element_line(colour = "black", size = 0.25))+
+  coord_cartesian(ylim = c(0,100))+
+  labs(x="Probabilidad de vacunación al inicio", y= "Iteración del máximo")
+
+datos%>%
+  group_by(probabilidad) %>%
+  summarise(
+   
+    promedio = mean(porcentaje, na.rm = TRUE),
+    desviacion_std = sd(porcentaje, na.rm = TRUE),
+    varianza = sd(porcentaje, na.rm = TRUE)^2,
+    mediana = median(porcentaje, na.rm = TRUE),
+    rango_intercuartil = IQR(porcentaje, na.rm = TRUE)
+  )
+
+
+shapiro.test(datos$porcentaje)
+kruskal.test(porcentaje~probabilidad, data=datos)
+pairwise.wilcox.test(datos$porcentaje, datos$probabilidad)
+
+datos%>%
+  group_by(probabilidad) %>%
+  summarise(
+   
+    promedio = mean(tiempo, na.rm = TRUE),
+    desviacion_std = sd(tiempo, na.rm = TRUE),
+    varianza = sd(tiempo, na.rm = TRUE)^2,
+    mediana = median(tiempo, na.rm = TRUE),
+    rango_intercuartil = IQR(tiempo, na.rm = TRUE)
+  )
+
+shapiro.test(datos$tiempo)
+kruskal.test(tiempo~probabilidad, data=datos)
+pairwise.wilcox.test(datos$tiempo, datos$probabilidad)
 
 datos$probabilidad = as.factor(datos$probabilidad)
 
