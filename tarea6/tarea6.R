@@ -162,19 +162,3 @@ datos%>%
 shapiro.test(datos$tiempo)
 kruskal.test(tiempo~probabilidad, data=datos)
 pairwise.wilcox.test(datos$tiempo, datos$probabilidad)
-
-datos$probabilidad = as.factor(datos$probabilidad)
-
-ggplot(datos, aes(x=probabilidad , y= porcentaje , fill= rep)) + # fill=name allow to automatically dedicate a color for each group
-  geom_boxplot(fill = "#F8766D", colour = "#1F3552")+
-  stat_boxplot(geom = "errorbar", width = 0.9)+
-  theme(axis.line = element_line(colour = "black", size = 0.25))+
-  coord_cartesian(ylim = c(0,70))+
-  labs(x="Probabilidad de vacunacion al inicio", y= "Porcentaje de infectados")
-
-ggplot(datos, aes(x=probabilidad , y= tiempo , fill= rep)) + # fill=name allow to automatically dedicate a color for each group
-  geom_boxplot(fill = "#F8766D", colour = "#1F3552")+
-  stat_boxplot(geom = "errorbar", width = 0.9)+
-  theme(axis.line = element_line(colour = "black", size = 0.25))+
-  coord_cartesian(ylim = c(0,100))+
-  labs(x="Probabilidad de vacunacion al inicio", y= "iteracion del maximo")
