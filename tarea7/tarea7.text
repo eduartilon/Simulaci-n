@@ -45,7 +45,7 @@ Con las instrucciones de la tarea \cite{busqueda} y lo visto en clase \cite{twit
 
 función \ref{funcion} usada con restricción $ -1 \leq x, y \leq 6 \ $ 
 \begin{equation}
-f(x,y) = ((10* cos(x^2) - 10 * x + 12 * cos(y^2) -5* y))
+f(x,y) = 10* cos(x^2) - 10 * x + 12 * cos(y^2) -5* y
 \label{funcion}
 \end{equation}
 
