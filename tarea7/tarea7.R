@@ -14,7 +14,7 @@ z <- outer(x, y, g)
 
 low <- -1
 high <- 6
-j <- seq(0.5, 2, 0.5)
+j <- seq(0.25, 4, 0.25)
 replicas <- 50 #puntitos
 
 for (step in j) {
@@ -119,8 +119,9 @@ trellis.unfocus()
 
 graphics.off()
 
-datos<- rbind(datos,step)
 }
+ultimo<-min(val)
+datos<- rbind(datos,c(step,ultimo))
 }
 
 
