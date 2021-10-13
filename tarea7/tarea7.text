@@ -43,7 +43,7 @@ En esta práctica se realizó un estudio sobre el movimiento hacia los máximos 
 
 Con las instrucciones de la tarea \cite{busqueda} y lo visto en clase \cite{twitchsimu} se le hicieron modificaciones al código para obtener los máximos \cite{maria} añadiendo información al \texttt{for} que limita la función, a diversos pasos y sus respectivas réplicas con un \texttt{for} para el análisis estadístico de una función dada. Así mismo se creó un gif que muestra el movimiento de los puntos \cite{gif}.
 
-función \ref{funcion} usada con restricción $ -1 \leq x, y \leq 6 \ $ 
+Función \ref{funcion} usada con restricción: $ -1 \leq x, y \leq 6 \ $ 
 \begin{equation}
 f(x,y) = 10* cos(x^2) - 10 * x + 12 * cos(y^2) -5* y
 \label{funcion}
