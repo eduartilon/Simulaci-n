@@ -15,9 +15,12 @@ z <- outer(x, y, g)
 low <- -1
 high <- 6
 j <- seq(0.25, 4, 0.25)
+repe<- (1:30)
 replicas <- 50 #puntitos
 
 for (step in j) {
+for (rep in repe) {
+  
 
 replica <- function(t) {
   curr <- c(runif(1, low, high), runif(1, low, high))
@@ -123,7 +126,39 @@ graphics.off()
 ultimo<-min(val)
 datos<- rbind(datos,c(step,ultimo))
 }
-
+}
 
 
 stopImplicitCluster()
+
+
+
+library(ggplot2)
+library(tidyverse)
+
+names(datos)<-c("paso", "distancia")
+datos$paso = as.factor(datos$paso)
+
+ggplot(datos, aes(x=paso , y= distancia , fill= rep)) + # fill=name allow to automatically dedicate a color for each group
+  geom_boxplot(fill = "#F8766D", colour = "#1F3552")+
+  stat_boxplot(geom = "errorbar", width = 0.9)+
+  theme(axis.line = element_line(colour = "black", size = 0.25))+
+  coord_cartesian(ylim = c(-70, 50))+
+  labs(x="Paso", y= "Último máximo")
+
+datos%>%
+  group_by(paso) %>%
+  summarise(
+    
+    promedio = mean(distancia, na.rm = TRUE),
+    desviacion_std = sd(distancia, na.rm = TRUE),
+    varianza = sd(distancia, na.rm = TRUE)^2,
+    mediana = median(distancia, na.rm = TRUE),
+    rango_intercuartil = IQR(distancia, na.rm = TRUE)
+  )
+
+tapply(datos$distancia, datos$paso, shapiro.test)
+
+kruskal.test(distancia~paso, data=datos)
+
+pairwise.wilcox.test(datos$distancia, datos$paso)
