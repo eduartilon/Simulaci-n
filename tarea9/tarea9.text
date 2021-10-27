@@ -481,7 +481,7 @@ graphics.off()
 
 
 \section{Conclusiones}
-De la práctica podemos concluir que a menor masa se tiene una mayor velocidad y esto se debe a que la velocidad resultante es fuertemente dependiente de las diversas masas que hay en el sistema lo cual es cierto para masas muy pequeñas. Cuando se tenían masas iguales no se observaron cambios entre las velocidades de las partículas ya que solo dependían de las cargas. De igual forma las de mayor masa presentan una menor velocidad y por eso no se observan grandes diferencias entre la mayoría de las partículas.De las pruebas no se obtuvieron datos con distribución normal y se rechazaban las hipótesis nulas donde no todas las medianas son iguales. 
+De la práctica podemos concluir que a menor masa se tiene una mayor velocidad y esto se debe a que la velocidad resultante es fuertemente dependiente de las diversas masas que hay en el sistema lo cual es cierto para masas muy pequeñas. Cuando se tenían masas iguales no se observaron cambios entre las velocidades de las partículas ya que solo dependían de las cargas. De igual forma las de mayor masa presentan una menor velocidad y por eso no se observan grandes diferencias entre la mayoría de las partículas. De las pruebas no se obtuvieron datos con distribución normal y se rechazaban las hipótesis nulas donde no todas las medianas son iguales. 
 
 \bibliography{referencias}
 \bibliographystyle{plainnat}
