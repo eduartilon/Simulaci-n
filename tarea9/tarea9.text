@@ -323,7 +323,7 @@ kruskal.test(vel~g, data=datos)
 cwilcox<-pairwise.wilcox.test(datos$vel, datos$g)
 \end{lstlisting}
 
-De la gráfica \ref{grafica4} podemos observar puntos máximos en la velocidad independientes de la carga. Estos son correspondientes a los datos de la tabla \ref{tabla6} 
+De la gráfica \ref{grafica4} podemos observar puntos máximos en la velocidad independientes de la carga. Estos son correspondientes a los datos de la tabla \ref{tabla6}. 
 
 \begin{table}[h!]
 \centering
