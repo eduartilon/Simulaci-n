@@ -159,6 +159,7 @@ while(TRUE) {
 }
 }
 }
+
 library(ggplot2)
 datos$segundo = as.factor(datos$segundo)
 datoss = split.data.frame(datos, f = datos$poblacion)
@@ -168,18 +169,21 @@ ggplot(datoss$`20`, aes(x= segundo, y= mejor)) +
   stat_boxplot(geom = "errorbar", width = 0.9)+
   theme(axis.line = element_line(colour = "black", size = 0.25))+
   geom_hline(aes(yintercept=Optimo), colour="green")+
-  labs(x = "Segundos", y = "Mayor valor")
+  labs(x = "Segundos", y = "Mayor valor")+
+  coord_cartesian(ylim = c(7000, 11000))
 
 ggplot(datoss$`30`, aes(x= segundo, y= mejor)) + 
   geom_boxplot(fill = "#F8766D", colour = "#1F3552")+
   stat_boxplot(geom = "errorbar", width = 0.9)+
   geom_hline(aes(yintercept=Optimo), colour="green")+
   theme(axis.line = element_line(colour = "black", size = 0.25))+
-  labs(x = "Segundos", y = "Mayor valor")
+  labs(x = "Segundos", y = "Mayor valor")+
+  coord_cartesian(ylim = c(7000, 11000))
 
 ggplot(datoss$`40`, aes(x= segundo, y= mejor)) + 
   geom_boxplot(fill = "#F8766D", colour = "#1F3552")+
   stat_boxplot(geom = "errorbar", width = 0.9)+
   geom_hline(aes(yintercept=Optimo), colour="green")+
   theme(axis.line = element_line(colour = "black", size = 0.25))+
-  labs(x = "Segundos", y = "Mayor valor")
+  labs(x = "Segundos", y = "Mayor valor")+
+  coord_cartesian(ylim = c(7000, 11000))
