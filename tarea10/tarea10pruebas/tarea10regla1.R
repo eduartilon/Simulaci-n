@@ -1,5 +1,6 @@
 library(testit)
 
+
 knapsack <- function(cap, peso, valor) {
   n <- length(peso)
   pt <- sum(peso)
@@ -48,11 +49,11 @@ normalizar <- function(data) {
 
 #Modificacion para la regla 1
 generador.pesos <- function(cuantos, min, max) {
-  return(sort(round(normalizar(rnorm(cuantos)) * (max - min) + min)))
+  return(sort(round(runif(cuantos) * (max - min) + min)))
 }
 
 generador.valores <- function(cuantos, min, max) {
-  return(sort(round(normalizar(rnorm(cuantos)) * (max - min) + min)))
+  return(sort(round(runif(cuantos) * (max - min) + min)))
 }
 
 poblacion.inicial <- function(n, tam) {
@@ -138,4 +139,6 @@ while(TRUE) {
   mejores <- c(mejores, mejor)
   print(paste(mejor, (optimo - mejor) / optimo))
   if (remaining <= 0) break
+  
+
 }
