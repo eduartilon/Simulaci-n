@@ -75,6 +75,8 @@ reproduccion <- function(x, y, n) {
   return(c(xy, yx))
 }
 
+datos = data.frame()
+
 pmutant<-c(0.05,0.1,0.5)
 j<- 1:3
 for (pm in pmutant){
@@ -91,7 +93,7 @@ tam <- dim(p)[1]
 assert(tam == init)
 
 rep <- 10
-tmax <- 15
+
 mejores <- double()
 
 
@@ -153,7 +155,7 @@ while(TRUE) {
   
   resultado = c(replicas, segundos, mejor,faltaaloptimo,pm,optimo)
   datos = rbind(datos, resultado)
-  names(datos) = c("replicas", "segundo", "mejor", "%optimo", "pm","optimo")
+  names(datos) = c("replicas", "segundo", "mejor", "%optimo", "pm","Optimo")
 }
 }
 }
@@ -165,19 +167,23 @@ ggplot(datoss$`0.05`, aes(x= segundo, y= mejor)) +
   geom_boxplot(fill = "#F8766D", colour = "#1F3552")+
   stat_boxplot(geom = "errorbar", width = 0.9)+
   theme(axis.line = element_line(colour = "black", size = 0.25))+
-  geom_hline(aes(yintercept=optimo), colour="green")+
-  labs(x = "Segundos", y = "Mayor valor")
+  geom_hline(aes(yintercept=Optimo), colour="green")+
+  labs(x = "Segundos", y = "Mayor valor")+
+  coord_cartesian(ylim = c(7000, 10500))
 
 ggplot(datoss$`0.1`, aes(x= segundo, y= mejor)) + 
   geom_boxplot(fill = "#F8766D", colour = "#1F3552")+
   stat_boxplot(geom = "errorbar", width = 0.9)+
-  geom_hline(aes(yintercept=optimo), colour="green")+
+  geom_hline(aes(yintercept=Optimo), colour="green")+
   theme(axis.line = element_line(colour = "black", size = 0.25))+
-  labs(x = "Segundos", y = "Mayor valor")
+  labs(x = "Segundos", y = "Mayor valor")+
+  coord_cartesian(ylim = c(7000, 10500))
 
 ggplot(datoss$`0.5`, aes(x= segundo, y= mejor)) + 
   geom_boxplot(fill = "#F8766D", colour = "#1F3552")+
   stat_boxplot(geom = "errorbar", width = 0.9)+
-  geom_hline(aes(yintercept=optimo), colour="green")+
+  geom_hline(aes(yintercept=Optimo), colour="green")+
   theme(axis.line = element_line(colour = "black", size = 0.25))+
-  labs(x = "Segundos", y = "Mayor valor")
+  labs(x = "Segundos", y = "Mayor valor")+
+  coord_cartesian(ylim = c(7000, 10500))
+
