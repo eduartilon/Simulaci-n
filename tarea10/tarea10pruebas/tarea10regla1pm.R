@@ -53,7 +53,7 @@ generador.pesos <- function(cuantos, min, max) {
 }
 
 generador.valores <- function(cuantos, min, max) {
-  return(sort(round(runif(cuantos) * (max - min) + min)))
+  return(round(runif(cuantos) * (max - min) + min))
 }
 
 poblacion.inicial <- function(n, tam) {
@@ -151,9 +151,9 @@ while(TRUE) {
   if (remaining <= 0) break
   
   
-  resultado = c(replicas, segundos, mejor,faltaaloptimo,pm)
+  resultado = c(replicas, segundos, mejor,faltaaloptimo,pm,optimo)
   datos = rbind(datos, resultado)
-  names(datos) = c("replicas", "segundo", "mejor", "%optimo", "pm")
+  names(datos) = c("replicas", "segundo", "mejor", "%optimo", "pm","optimo")
 }
 }
 }
@@ -165,16 +165,19 @@ ggplot(datoss$`0.05`, aes(x= segundo, y= mejor)) +
   geom_boxplot(fill = "#F8766D", colour = "#1F3552")+
   stat_boxplot(geom = "errorbar", width = 0.9)+
   theme(axis.line = element_line(colour = "black", size = 0.25))+
-  labs(x = "Segundos", y = "Mejor")
+  geom_hline(aes(yintercept=optimo), colour="green")+
+  labs(x = "Segundos", y = "Mayor valor")
 
 ggplot(datoss$`0.1`, aes(x= segundo, y= mejor)) + 
   geom_boxplot(fill = "#F8766D", colour = "#1F3552")+
   stat_boxplot(geom = "errorbar", width = 0.9)+
+  geom_hline(aes(yintercept=optimo), colour="green")+
   theme(axis.line = element_line(colour = "black", size = 0.25))+
-  labs(x = "Segundos", y = "Mejor")
+  labs(x = "Segundos", y = "Mayor valor")
 
 ggplot(datoss$`0.5`, aes(x= segundo, y= mejor)) + 
   geom_boxplot(fill = "#F8766D", colour = "#1F3552")+
   stat_boxplot(geom = "errorbar", width = 0.9)+
+  geom_hline(aes(yintercept=optimo), colour="green")+
   theme(axis.line = element_line(colour = "black", size = 0.25))+
-  labs(x = "Segundos", y = "Mejor")
+  labs(x = "Segundos", y = "Mayor valor")
