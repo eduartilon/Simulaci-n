@@ -75,6 +75,8 @@ reproduccion <- function(x, y, n) {
   return(c(xy, yx))
 }
 
+datos = data.frame()
+
 reproducc<-c(10, 20, 30)
 j<- 1:3
 for (rep in reproducc){
@@ -165,19 +167,24 @@ ggplot(datoss$`10`, aes(x= segundo, y= mejor)) +
   stat_boxplot(geom = "errorbar", width = 0.9)+
   theme(axis.line = element_line(colour = "black", size = 0.25))+
   geom_hline(aes(yintercept=Optimo), colour="green")+
-  labs(x = "Segundos", y = "Mayor valor")
+  labs(x = "Segundos", y = "Mayor valor")+
+  coord_cartesian(ylim = c(7000, 10500))
 
 ggplot(datoss$`20`, aes(x= segundo, y= mejor)) + 
   geom_boxplot(fill = "#F8766D", colour = "#1F3552")+
   stat_boxplot(geom = "errorbar", width = 0.9)+
   geom_hline(aes(yintercept=Optimo), colour="green")+
   theme(axis.line = element_line(colour = "black", size = 0.25))+
-  labs(x = "Segundos", y = "Mayor valor")
+  labs(x = "Segundos", y = "Mayor valor")+
+  coord_cartesian(ylim = c(7000, 10500))
 
 ggplot(datoss$`30`, aes(x= segundo, y= mejor)) + 
   geom_boxplot(fill = "#F8766D", colour = "#1F3552")+
   stat_boxplot(geom = "errorbar", width = 0.9)+
   geom_hline(aes(yintercept=Optimo), colour="green")+
   theme(axis.line = element_line(colour = "black", size = 0.25))+
-  labs(x = "Segundos", y = "Mayor valor")
+  labs(x = "Segundos", y = "Mayor valor")+
+  coord_cartesian(ylim = c(7000, 10500))
+
+
 
