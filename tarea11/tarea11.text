@@ -185,8 +185,54 @@ De la gráfica \ref{grafica1} podemos ver que hay diferencias considerables conf
 \end{tabular}
 \end{table}
 
+Para el reto 1 se utilizó el \texttt{kmeans} \cite{kmean} para el análisis del frente obtenido y separarlo a diversos porcentajes del mismo, obteniéndose las gráficas de la figura \ref{fig1} en dónde el rojo es el frente original y el verde es el subconjunto. 
+
+\newpage
+
+\begin{figure}[h!]
+\centering
+\caption{Frente a diversos porcentajes.}
+\begin{subfigure}[b]{0.45\linewidth}
+\includegraphics[width=\linewidth]{r130.png}
+\caption{30\%}
+\label{r130}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\linewidth}
+\includegraphics[width=\linewidth]{r140.png}
+\caption{40\%}
+\label{r140}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\linewidth}
+\includegraphics[width=\linewidth]{r170.png}
+\caption{70\%}
+\label{r170}
+\end{subfigure}
+\label{fig1}
+\end{figure}
+
+\begin{lstlisting} [language=R, caption= Código para la obtención de las gráficas del reto 1.]
+porcentajes=70
+res.k<-kmeans(frente, round(dim(frente)[1]*porcentajes/100), iter.max = 1000, nstart = 1000,
+       algorithm = c("Hartigan-Wong", "Lloyd", "Forgy",
+                     "MacQueen"), trace=FALSE)
+tablas<-res.k$centers
+res.k$betweenss / res.k$totss
+
+png("p11_frentesub2.png", width=15, height=15, units="cm", res=1200)
+plot(val[,1], val[,2], xlab=paste(xl, "mejor con cuadro azul"),
+     ylab=paste(yl,"mejor con bolita naranja"),
+     main=NULL)
+points((tablas[,1]), (tablas[,2]), col="green", pch=16, cex=1.5)
+points((frente[,1]), (frente[,2]), col="red", pch=16, cex=0.9)
+mejor1 <- which.max((1 + (-2 * minim[1])) * val[,1])
+mejor2 <- which.max((1 + (-2 * minim[2])) * val[,2])
+points(val[mejor1, 1], val[mejor1, 2], col="blue", pch=15, cex=0.5)
+points(val[mejor2, 1], val[mejor2, 2], col="orange", pch=16, cex=0.5)
+graphics.off()
+\end{lstlisting}
+
 \section{Conclusiones}
-De la práctica podemos concluir que mientras más funciones se tienen se alcanza un mayor rango de porcentaje de soluciones de Pareto. A un número de funciones bajas se concentra el \% de soluciones en la parte baja del rango intercuartil. Al aumentar el número de funciones se observa una concentración casi uniforme a lo largo del rango intercuartil. De las pruebas estadísticas de Shapiro–Wilk se tiene que no tienen una distribución normal pero se observa que esta aumenta conforme el número de funciones aumenta hasta cierto punto, luego vuelve a decrecer. De la prueba de Kruskal-Wallis se rechaza la hipótesis nula y se concluye que las medianas no son todas iguales y para observar mejor estas diferencias, de la prueba por parejas de Wilcox se observa como todos los grupos son significativamente diferentes. Se cree que el comportamiento se debe a que al haber más rutas dimensionales se pueden tener más soluciones óptimas y por ende puede aumentar el porcentaje.
+De la práctica podemos concluir que mientras más funciones se tienen se alcanza un mayor rango de porcentaje de soluciones de Pareto. A un número de funciones bajas se concentra el \% de soluciones en la parte baja del rango intercuartil. Al aumentar el número de funciones se observa una concentración casi uniforme a lo largo del rango intercuartil. De las pruebas estadísticas de Shapiro–Wilk se tiene que no tienen una distribución normal pero se observa que esta aumenta conforme el número de funciones aumenta hasta cierto punto, luego vuelve a decrecer. De la prueba de Kruskal-Wallis se rechaza la hipótesis nula y se concluye que las medianas no son todas iguales y para observar mejor estas diferencias, de la prueba por parejas de Wilcox se observa como todos los grupos son significativamente diferentes. Se cree que el comportamiento se debe a que al haber más rutas dimensionales se pueden tener más soluciones óptimas y por ende puede aumentar el porcentaje. Del reto 1 se logró un subconjunto dependiente del porcentaje deseado.
 
 \bibliography{referencias}
 \bibliographystyle{plainnat}
