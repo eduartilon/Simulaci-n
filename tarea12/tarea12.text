@@ -290,8 +290,64 @@ n3g3b3 & 0.7192 & $1.35\times 10^{-15}$ \\ \hline
 \end{tabular}
 \end{table}
 
+Para el reto 1 se modificó el documento para que leyera 12 símbolos ASCII aparte de los números y se obtubo la figura \ref{grafica2}, de igual forma se obtubo una matriz.
+\newpage
+
+\begin{figure} [h!]% figura
+    \centering
+    \caption{ Números y símbolos ASCII obtenidos.}
+    \label{grafica2}
+    \includegraphics[width=150mm]{p12g.png} % archivo
+\end{figure}
+
+\begin{lstlisting} [language=R, caption= Código para el reto 1.]
+
+modelos <- read.csv("digitosr1.txt", sep=" ", header=FALSE, stringsAsFactors=F)
+modelos[modelos=='n'] <- 0.995
+modelos[modelos=='g'] <- 0.92
+modelos[modelos=='b'] <- 0.002
+
+r <- 7
+c <- 5
+dim <- r * c
+
+tasa <- 0.15
+tranqui <- 0.99
+
+tope <- 21
+digitos <- 0:tope
+\end{lstlisting}
+
+\begin{lstlisting} [language=R, caption= Matriz obtenida.]
+    0  1  2  3 4  5 6 7  8 9 10 11 12 13 14 15 16 17 18 19 20 21 <NA>
+0   0  0  0  0 0  0 0 0  1 0 11  0  0  0  1  1  0  0  0  0  0  0    0
+1   0  8  0  0 0  0 0 0  0 0  0  0  0  0  0  0  0  0  0  0  0  0    0
+2   0  0 12  2 0  0 0 0  0 0  0  0  0  0  0  0  0  0  0  0  0  0    0
+3   0  0  0 12 0  0 0 1  0 0  0  3  0  0  0  0  0  0  0  0  0  0    0
+4  15  0  0  0 0  0 0 0  0 0  0  0  0  0  0  0  0  0  0  0  0  0    0
+5   0 14  0  0 0  3 0 0  0 1  0  0  0  1  0  0  0  0  0  0  0  0    0
+6   0  0  0  0 9  2 0 0  0 0  0  0  0  0  0  0  0  0  0  0  0  0    0
+7   0  0  0  0 0 13 0 1  0 1  0  0  0  0  0  0  0  0  0  0  0  0    0
+8   0  1  0  0 0  0 0 0 10 0  0  3  0  0  2  0  0  0  0  0  0  0    0
+9   0  0  0  0 8  0 0 0  0 0  0  0  1  0  0  0  0  0  0  0  0  0    0
+10  0  0  0  0 0  0 0 0  0 0  6  0  0  0  2  1  0  0  0  0  0  0    0
+11  0  1  1 15 0  0 0 0  0 1  4  2  0  0  0  1  0  0  0  0  0  0    0
+12  0  0  0  0 0  0 0 0  0 0  0  0 11  1  0  0  0  0  0  0  0  0    3
+13  0  0  0  0 0  0 0 0  0 0  0  0  0  0  2 17  0  0  0  0  0  0    0
+14  0  0  0  0 0  0 0 0  0 0  0  0 12  0  0  0  0  0  0  0  0  0    1
+15  0  0  0  0 0  0 0 0  0 0  0  1  0  0  2 11  0  0  0  0  0  0    0
+16  0  0  0  0 0  0 0 0  0 0  0  0  0  0  0  0  0  0  0  1  0  0   12
+17  0  2  0  0 0  0 0 0  0 0  0  0  0  0  0  0  0 11  0  0  0  0    0
+18  0  0  0  0 0  0 0 0  0 0  0  0  0  0  0  0  0  0  9  0  0  0    0
+19  0  0  0  0 0  0 0 0  0 0  0  0  0  0  0  0  0  0  5  0  0  0    3
+20  0  0  0  0 0  0 0 0  0 0  0  0  0  0  0  0  9  0  0  0  0  0    0
+21  0  0  0  0 0  0 0 0  0 0  0  0  0  2  0  0  0  0  0  0  0 12    2
+\end{lstlisting}
+
+
+
 \section{Conclusiones}
-De la gráfica se puede concluir que las variables de las probabilidadaes tienen influencia en distinta medida correlacionada entre ellas. Se puede observar que la probabilidad en negro tiene una gran influencia en valores altos cercanos a 1 y del valor blanco se tiene influencia en valores cercanos a 0, el valor de gris muestra un ligero aumento al puntaje f entre grupos aumentando la concentración de valores altos conforme aumenta en conjunto con los otros valores mientras el blanco disminuya.
+De la gráfica se puede concluir que las variables de las probabilidadaes tienen influencia en distinta medida correlacionada entre ellas. Se puede observar que la probabilidad en negro tiene una gran influencia en valores altos cercanos a 1 y del valor blanco se tiene influencia en valores cercanos a 0, el valor de gris muestra un ligero aumento al puntaje f entre grupos aumentando la concentración de valores altos conforme aumenta en conjunto con los otros valores mientras el blanco disminuya. Del reto se consiguió generar los doce símbolos ASCII.
 
 \bibliography{referencias}
 \bibliographystyle{plainnat}
